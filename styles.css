@@ -1,11 +1,63 @@
+*{
+    font-family: 'Lora', serif;
+    margin: 0;
+    padding: 0;
+}
 img{
     width: 200px;
     height: 250px;
     background-color: rgb(238, 233, 233);
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 form{
     margin: 25px;
+}
+
+.p-name{
+    font-weight: bold;
+    font-size: 2rem;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    
+}
+
+.p-id{
+    font-weight: 400;
+    font-size: 1.3rem;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.p-container{
+    background-color: rgb(150, 150, 150);
+    border-radius: 10px;
+    height: 70px;
+}
+
+.p-description{
+    margin-top: 20px;
+    
+}
+
+.p-description1{
+    font-size: 1.3rem;
+    background: rgb(63, 134, 214);
+    border-radius: 3%;
+    height: fit-content;
+    width: fit-content;
+    margin-top: 30px;
+}
+
+.p-description2{
+    font-size: 1.3rem;
+    background: rgb(74, 148, 233);
+    border-radius: 3%;
 }
 
 

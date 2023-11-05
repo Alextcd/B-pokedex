@@ -5,6 +5,7 @@ const pokeImgContainer = document.getElementById("poke-img-container")
 const pokeId = document.getElementById("poke-id")
 const pokeType = document.getElementById("poke-type")
 const pokeStat = document.getElementById("poke-stat")
+const pokeDescription = document.getElementById("poke-description")
 
 
 const searchingPokemon = (event) =>{
@@ -13,7 +14,7 @@ const searchingPokemon = (event) =>{
     fetch(`https://pokeapi.co/api/v2/pokemon/${value.toLowerCase()}`)
     .then(data => data.json())
     .then(response => gettingPokemonData(response)) //Find the pokemon in the API
-    .catch(err => errorFounding()) //Catching if the pokemon is not found
+    .catch(err => errorFounding(err)) //Catching if the pokemon is not found
 
 
 }
@@ -21,6 +22,9 @@ const searchingPokemon = (event) =>{
 const gettingPokemonData = (data) =>{
     const sprite = data.sprites.other["official-artwork"].front_default;
     const {stats, types} = data;
+    const heig = data.height;
+    const w  = data.weight;
+    const {abilities} = data;
 
     pokeName.textContent = data.name;
     pokeImg.setAttribute("src", sprite);
@@ -29,6 +33,7 @@ const gettingPokemonData = (data) =>{
     //Aqui va modificar la tarjeta
     gettingPokemonTypes(types);
     gettingPokemonStats(stats);
+    gettingPokemonDescription(heig,w,abilities);
 } 
 
 const gettingPokemonTypes = (types) =>{
@@ -48,8 +53,8 @@ const gettingPokemonStats = (stats) =>{
         const newElementS = document.createElement("div");
         const newElementA = document.createElement("div");
         newContainer.setAttribute("class","row")
-        newElementA.setAttribute("class", "col-6");
-        newElementS.setAttribute("class","col-6")
+        newElementA.setAttribute("class", "col-4");
+        newElementS.setAttribute("class","col-8")
         newElementS.textContent = stat.stat.name;
         newElementA.textContent = stat.base_stat;
         pokeStat.appendChild(newContainer);
@@ -64,4 +69,22 @@ const errorFounding = () =>{
     pokeStat.innerHTML = "";
     pokeType.innerHTML = "";
     pokeId.textContent ="";
+    pokeDescription.innerHTML="";
+}
+
+const gettingPokemonDescription = (he,we,ab) =>{
+    pokeDescription.innerHTML ="";
+    ab.forEach(element => {    
+            const nElement = document.createElement("div");            
+            nElement.innerHTML = `${element.ability.name}`;
+            pokeDescription.appendChild(nElement)    
+    });
+    
+    const n = document.createElement("div");
+    n.innerHTML = `Height ${he} <div> Weight ${we} </div>`;
+    pokeDescription.appendChild(n);
+    pokeDescription.setAttribute("class","p-description1");
+
+
+
 }
